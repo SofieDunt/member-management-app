@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { Typography } from 'antd';
+
+const { Text } = Typography;
 
 export const WHITE = '#FFF';
 export const DARK_GREY = '#4E4D4D';
@@ -27,4 +30,22 @@ export const Line = styled.div`
   height: 2px;
   width: 100%;
   background: ${BACKGROUND_GREY};
+`;
+
+export const BlockText = styled(Text)`
+  display: block;
+  font-size: 13px;
+  line-height: 20px;
+`;
+
+export const LightText = styled(BlockText)`
+  color: ${LIGHT_GREY};
+`;
+
+export const TextHeader = styled(Text)`
+  display: block;
+  font-size: 16px;
+  line-height: 20px;
+  color: ${DARK_GREY};
+  margin: 20px 0;
 `;

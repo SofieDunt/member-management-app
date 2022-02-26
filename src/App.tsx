@@ -1,4 +1,5 @@
 import React from 'react';
+import 'antd/dist/antd.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ListScreen from './screens/listScreen';
 import AddScreen from './screens/addScreen';
@@ -12,9 +13,9 @@ const AppLayout = styled.div`
   background: ${BACKGROUND_GREY};
 `;
 
-enum Routes {
+export enum Routes {
   LIST = '/',
-  ADD = '/add/:userId',
+  ADD = '/add',
   EDIT = '/edit/:userId',
 }
 

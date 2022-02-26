@@ -1,11 +1,9 @@
 import React from 'react';
 import { MemberProps, MemberRoles } from '../../ducks/types';
-import { Avatar, Typography } from 'antd';
+import { Avatar } from 'antd';
 import styled from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
-import { Line, LIGHT_GREY, WHITE } from '../../theme';
-
-const { Text } = Typography;
+import { Line, LIGHT_GREY, WHITE, BlockText, LightText } from '../../theme';
 
 const MemberPortfolioContainer = styled.div`
   box-sizing: border-box;
@@ -24,16 +22,6 @@ const MemberAvatar = styled(Avatar)`
   border-radius: 50%;
   text-align: center;
   color: ${WHITE};
-`;
-
-const BlockText = styled(Text)`
-  display: block;
-  font-size: 13px;
-  line-height: 20px;
-`;
-
-const LightText = styled(BlockText)`
-  color: ${LIGHT_GREY};
 `;
 
 interface MemberPortfolioProps {

@@ -1,10 +1,12 @@
 import React from 'react';
 import ScreenHeader from '../../components/screenHeader';
+import { Link } from 'react-router-dom';
 import { ContentContainer, PageContainer, Line, BLUE } from '../../theme';
 import { MemberProps, MemberRoles } from '../../ducks/types';
 import MemberPortfolio from '../../components/memberPortfolio';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { Routes } from '../../App';
 
 const AddIcon = styled(PlusOutlined)`
   color: ${BLUE};
@@ -48,15 +50,17 @@ const ListScreen: React.FC = () => {
   return (
     <PageContainer>
       <ContentContainer>
-        <AddIcon />
+        <Link to={Routes.ADD}>
+          <AddIcon />
+        </Link>
         <ScreenHeader
           title={'Team members'}
           subtitle={`You have ${memberList.length} team members.`}
         />
-          <Line />
-          {memberList.map((member: MemberProps) => {
-            return <MemberPortfolio member={member} />;
-          })}
+        <Line />
+        {memberList.map((member: MemberProps) => {
+          return <MemberPortfolio member={member} />;
+        })}
       </ContentContainer>
     </PageContainer>
   );
