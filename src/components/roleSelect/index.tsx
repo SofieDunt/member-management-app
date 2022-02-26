@@ -18,7 +18,10 @@ interface RoleSelectProps {
   readonly defaultChecked: MemberRoles;
 }
 
-const RoleSelect: React.FC<RoleSelectProps> = ({ onSelect, defaultChecked }) => {
+const RoleSelect: React.FC<RoleSelectProps> = ({
+  onSelect,
+  defaultChecked,
+}) => {
   const [checked, setChecked] = useState(defaultChecked);
 
   const onClick = (clicked: MemberRoles) => {

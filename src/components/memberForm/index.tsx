@@ -5,6 +5,12 @@ import { BACKGROUND_GREY, TextHeader } from '../../theme';
 import styled from 'styled-components';
 import RoleSelect from '../roleSelect';
 
+const DeleteButton = styled(Button)`
+  margin-top: 25px;
+  float: left;
+  border: 1px solid ${BACKGROUND_GREY};
+`;
+
 const SaveButton = styled(Button)`
   margin-top: 25px;
   float: right;
@@ -21,10 +27,21 @@ const FormInput = styled(Input)`
 
 interface MemberFormProps {
   readonly onSubmit: (memberRequest: MemberProps) => void;
+  readonly onDelete?: () => void;
   readonly formInstance: FormInstance;
 }
 
-const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, formInstance }) => {
+const MemberForm: React.FC<MemberFormProps> = ({
+  onSubmit,
+  onDelete,
+  formInstance,
+}) => {
+  const onClickDelete = () => {
+    if (onDelete) {
+      onDelete();
+    }
+  };
+
   return (
     <Form form={formInstance} onFinish={onSubmit}>
       <TextHeader strong>Info</TextHeader>
@@ -59,6 +76,12 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, formInstance }) => {
         }
         defaultChecked={MemberRoles.REGULAR}
       />
+
+      {onDelete && (
+        <DeleteButton danger size={'large'} onClick={onDelete}>
+          Delete
+        </DeleteButton>
+      )}
 
       <SaveButton type={'primary'} htmlType={'submit'} size={'large'}>
         Save
