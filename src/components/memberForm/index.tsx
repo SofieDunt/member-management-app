@@ -25,6 +25,7 @@ const FormInput = styled(Input)`
   border-radius: 5px;
 `;
 
+// Props for the form for what to do on completion and form state
 interface MemberFormProps {
   readonly onSubmit: (memberRequest: MemberProps) => void;
   readonly onDelete?: () => void;
@@ -32,12 +33,14 @@ interface MemberFormProps {
   readonly defaultMember?: MemberProps;
 }
 
+// A form with items for all member props with two possible actions: save and delete
 const MemberForm: React.FC<MemberFormProps> = ({
   onSubmit,
   onDelete,
   formInstance,
   defaultMember,
 }) => {
+  // If a default member was given, set the form to show the default values
   if (defaultMember !== undefined) {
     formInstance.setFields([
       { name: 'firstName', value: defaultMember.firstName },
@@ -47,9 +50,6 @@ const MemberForm: React.FC<MemberFormProps> = ({
       { name: 'role', value: defaultMember.role },
     ]);
   }
-
-  const defaultCheckedRole =
-    formInstance.getFieldValue('role') || MemberRoles.REGULAR;
 
   return (
     <Form form={formInstance} onFinish={onSubmit}>

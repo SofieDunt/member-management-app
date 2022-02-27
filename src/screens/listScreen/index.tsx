@@ -1,6 +1,6 @@
 import React from 'react';
 import ScreenHeader from '../../components/screenHeader';
-import { BLUE, ContentContainer, Line, PageContainer } from '../../theme';
+import { BLUE, ContentContainer, Line, ScreenContainer } from '../../theme';
 import { MemberAppState, MemberProps } from '../../ducks/types';
 import MemberPortfolio from '../../components/memberPortfolio';
 import { PlusOutlined } from '@ant-design/icons';
@@ -9,15 +9,17 @@ import { Screens, ScreenProps } from '../../App';
 import { connect } from 'react-redux';
 import { List } from 'antd';
 
+// An icon to click on to navigate to the Add screen
 const AddIcon = styled(PlusOutlined)`
   color: ${BLUE};
   font-size: 24px;
   float: right;
 `;
 
+// A screen where users can view all their team members and navigate to Add/Edit screens
 const ListScreen: React.FC<ScreenProps> = ({ members, setCurrentScreen }) => {
   return (
-    <PageContainer>
+    <ScreenContainer>
       <ContentContainer>
         <AddIcon onClick={() => setCurrentScreen({ screen: Screens.ADD })} />
         <ScreenHeader
@@ -38,7 +40,7 @@ const ListScreen: React.FC<ScreenProps> = ({ members, setCurrentScreen }) => {
           }}
         />
       </ContentContainer>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

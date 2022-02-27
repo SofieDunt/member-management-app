@@ -13,15 +13,18 @@ const RoleSelectRow = styled.div`
   border-bottom: solid 2px ${BACKGROUND_GREY};
 `;
 
+// Props to enable initial checkedState and manage checking
 interface RoleSelectProps {
   readonly onSelect: (role: MemberRoles) => void;
   readonly defaultChecked: MemberRoles;
 }
 
+// A component to style a radio group with radio buttons on the right
 const RoleSelect: React.FC<RoleSelectProps> = ({
   onSelect,
   defaultChecked,
 }) => {
+  // the currently checked radio
   const [checked, setChecked] = useState(defaultChecked);
 
   const onClick = (clicked: MemberRoles) => {

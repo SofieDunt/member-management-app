@@ -1,6 +1,6 @@
 import React from 'react';
 import ScreenHeader from '../../components/screenHeader';
-import { ContentContainer, PageContainer } from '../../theme';
+import { ContentContainer, ScreenContainer } from '../../theme';
 import MemberForm from '../../components/memberForm';
 import { useForm } from 'antd/es/form/Form';
 import { MemberAppState, MemberProps } from '../../ducks/types';
@@ -9,10 +9,13 @@ import { connect, useDispatch } from 'react-redux';
 import { Screens, ScreenProps } from '../../App';
 import { deleteMember, editMember } from '../../ducks/thunks';
 
+// Extends the screen props to also indicate the current member being edited
+// ASSUME the given id will be valid
 interface EditScreenProps extends ScreenProps {
   readonly id?: number;
 }
 
+// A screen where users can edit or delete existing members (and return to List Screen upon completion)
 const EditScreen: React.FC<EditScreenProps> = ({
   id = 0,
   members,
@@ -22,17 +25,23 @@ const EditScreen: React.FC<EditScreenProps> = ({
   const dispatch = useDispatch();
 
   const dispatchEditMember = async (newMember: MemberProps) => {
-    await dispatch(editMember(id, newMember));
+    // edit member in store
+    dispatch(editMember(id, newMember));
+
+    // navigate back to list screen
     setCurrentScreen({ screen: Screens.LIST });
   };
 
   const dispatchDeleteMember = async () => {
-    await dispatch(deleteMember(id));
+    // delete member in store
+    dispatch(deleteMember(id));
+
+    // navigate back to list screen
     setCurrentScreen({ screen: Screens.LIST });
   };
 
   return (
-    <PageContainer>
+    <ScreenContainer>
       <ContentContainer>
         <ExitButton setCurrentScreen={setCurrentScreen} />
         <ScreenHeader
@@ -46,7 +55,7 @@ const EditScreen: React.FC<EditScreenProps> = ({
           defaultMember={members[id]}
         />
       </ContentContainer>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

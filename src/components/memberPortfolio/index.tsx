@@ -25,11 +25,13 @@ const MemberAvatar = styled(Avatar)`
   color: ${WHITE};
 `;
 
+// Props for what informaation to display and to enable navigation
 interface MemberPortfolioProps {
   readonly member: IdMemberProps;
   readonly setCurrentScreen: (screen: CurrentScreenProps) => void;
 }
 
+// A component to display information about a member and enable navigation to an Edit screen for that member
 const MemberPortfolio: React.FC<MemberPortfolioProps> = ({
   member,
   setCurrentScreen,

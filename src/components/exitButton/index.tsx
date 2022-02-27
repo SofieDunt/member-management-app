@@ -10,10 +10,12 @@ export const ExitIcon = styled(CloseOutlined)`
   float: right;
 `;
 
+// Props to enable the button to redirect
 interface ExitButtonProps {
   readonly setCurrentScreen: (screen: CurrentScreenProps) => void;
 }
 
+// A button that redirects back to the List screen
 const ExitButton: React.FC<ExitButtonProps> = ({ setCurrentScreen }) => {
   return (
     <ExitIcon onClick={() => setCurrentScreen({ screen: Screens.LIST })} />

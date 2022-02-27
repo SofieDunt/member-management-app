@@ -16,11 +16,13 @@ const ScreenSubtitle = styled.p`
   font-size: 12px;
 `;
 
+// Props for component content
 interface ScreenHeaderProps {
   readonly title: string;
   readonly subtitle: string;
 }
 
+// A component to style the screen title/subtitle
 const ScreenHeader: React.FC<ScreenHeaderProps> = ({ title, subtitle }) => {
   return (
     <ScreenHeaderContainer>
