@@ -1,12 +1,13 @@
 import React from 'react';
 import ScreenHeader from '../../components/screenHeader';
-import { Link } from 'react-router-dom';
-import { ContentContainer, PageContainer, Line, BLUE } from '../../theme';
-import { MemberProps, MemberRoles } from '../../ducks/types';
+import { BLUE, ContentContainer, Line, PageContainer } from '../../theme';
+import { MemberAppState, MemberProps } from '../../ducks/types';
 import MemberPortfolio from '../../components/memberPortfolio';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Routes } from '../../App';
+import { Screens, ScreenProps } from '../../App';
+import { connect } from 'react-redux';
+import { List } from 'antd';
 
 const AddIcon = styled(PlusOutlined)`
   color: ${BLUE};
@@ -14,56 +15,36 @@ const AddIcon = styled(PlusOutlined)`
   float: right;
 `;
 
-const ListScreen: React.FC = () => {
-  // todo connect to store
-  const memberList: MemberProps[] = [
-    {
-      firstName: 'First',
-      lastName: 'Last',
-      email: 'email@email.com',
-      phone: '111-222-3333',
-      role: MemberRoles.ADMIN,
-    },
-    {
-      firstName: 'Second',
-      lastName: 'Again',
-      email: 'again@email.com',
-      phone: '777-888-9999',
-      role: MemberRoles.REGULAR,
-    },
-    {
-      firstName: 'Second',
-      lastName: 'Again',
-      email: 'again@email.com',
-      phone: '777-888-9999',
-      role: MemberRoles.REGULAR,
-    },
-    {
-      firstName: 'Second',
-      lastName: 'Again',
-      email: 'again@email.com',
-      phone: '777-888-9999',
-      role: MemberRoles.REGULAR,
-    },
-  ];
-
+const ListScreen: React.FC<ScreenProps> = ({ members, setCurrentScreen }) => {
   return (
     <PageContainer>
       <ContentContainer>
-        <Link to={Routes.ADD}>
-          <AddIcon />
-        </Link>
+        <AddIcon onClick={() => setCurrentScreen({ screen: Screens.ADD })} />
         <ScreenHeader
           title={'Team members'}
-          subtitle={`You have ${memberList.length} team members.`}
+          subtitle={`You have ${members.length} team members.`}
         />
         <Line />
-        {memberList.map((member: MemberProps) => {
-          return <MemberPortfolio member={member} />;
-        })}
+        <List
+          dataSource={members}
+          renderItem={(member: MemberProps, id: number) => {
+            return (
+              <MemberPortfolio
+                key={id}
+                member={{ id, ...member }}
+                setCurrentScreen={setCurrentScreen}
+              />
+            );
+          }}
+        />
       </ContentContainer>
     </PageContainer>
   );
 };
 
-export default ListScreen;
+const mapStateToProps = (state: MemberAppState) => {
+  return {
+    members: state.members,
+  };
+};
+export default connect(mapStateToProps)(ListScreen);

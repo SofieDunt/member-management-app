@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { CloseOutlined } from '@ant-design/icons';
 import { BLUE } from '../../theme';
-import { Routes } from '../../App';
-import { Link } from 'react-router-dom';
+import { CurrentScreenProps, Screens } from '../../App';
 
 export const ExitIcon = styled(CloseOutlined)`
   color: ${BLUE};
@@ -11,11 +10,13 @@ export const ExitIcon = styled(CloseOutlined)`
   float: right;
 `;
 
-const ExitButton: React.FC = () => {
+interface ExitButtonProps {
+  readonly setCurrentScreen: (screen: CurrentScreenProps) => void;
+}
+
+const ExitButton: React.FC<ExitButtonProps> = ({ setCurrentScreen }) => {
   return (
-    <Link to={Routes.LIST}>
-      <ExitIcon />
-    </Link>
+    <ExitIcon onClick={() => setCurrentScreen({ screen: Screens.LIST })} />
   );
 };
 

@@ -29,18 +29,27 @@ interface MemberFormProps {
   readonly onSubmit: (memberRequest: MemberProps) => void;
   readonly onDelete?: () => void;
   readonly formInstance: FormInstance;
+  readonly defaultMember?: MemberProps;
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({
   onSubmit,
   onDelete,
   formInstance,
+  defaultMember,
 }) => {
-  const onClickDelete = () => {
-    if (onDelete) {
-      onDelete();
-    }
-  };
+  if (defaultMember !== undefined) {
+    formInstance.setFields([
+      { name: 'firstName', value: defaultMember.firstName },
+      { name: 'lastName', value: defaultMember.lastName },
+      { name: 'email', value: defaultMember.email },
+      { name: 'phone', value: defaultMember.phone },
+      { name: 'role', value: defaultMember.role },
+    ]);
+  }
+
+  const defaultCheckedRole =
+    formInstance.getFieldValue('role') || MemberRoles.REGULAR;
 
   return (
     <Form form={formInstance} onFinish={onSubmit}>
@@ -70,12 +79,17 @@ const MemberForm: React.FC<MemberFormProps> = ({
         <FormInput placeholder={'Phone Number'} />
       </Form.Item>
       <TextHeader strong>Role</TextHeader>
-      <RoleSelect
-        onSelect={(role) =>
-          formInstance.setFields([{ name: 'role', value: role }])
-        }
-        defaultChecked={MemberRoles.REGULAR}
-      />
+
+      <Form.Item name={'role'}>
+        <RoleSelect
+          onSelect={(role) =>
+            formInstance.setFields([{ name: 'role', value: role }])
+          }
+          defaultChecked={
+            defaultMember ? defaultMember.role : MemberRoles.REGULAR
+          }
+        />
+      </Form.Item>
 
       {onDelete && (
         <DeleteButton danger size={'large'} onClick={onDelete}>

@@ -1,11 +1,10 @@
 import React from 'react';
-import { MemberProps, MemberRoles } from '../../ducks/types';
+import { IdMemberProps, MemberRoles } from '../../ducks/types';
 import { Avatar } from 'antd';
 import styled from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
 import { Line, LIGHT_GREY, WHITE, BlockText, LightText } from '../../theme';
-import { Redirect, useHistory } from 'react-router-dom';
-import { Routes } from '../../App';
+import { CurrentScreenProps, Screens } from '../../App';
 
 const MemberPortfolioContainer = styled.div`
   box-sizing: border-box;
@@ -27,14 +26,16 @@ const MemberAvatar = styled(Avatar)`
 `;
 
 interface MemberPortfolioProps {
-  readonly member: MemberProps;
+  readonly member: IdMemberProps;
+  readonly setCurrentScreen: (screen: CurrentScreenProps) => void;
 }
 
-const MemberPortfolio: React.FC<MemberPortfolioProps> = ({ member }) => {
-  const history = useHistory();
-
+const MemberPortfolio: React.FC<MemberPortfolioProps> = ({
+  member,
+  setCurrentScreen,
+}) => {
   const redirectToEdit = () => {
-    history.push(Routes.EDIT);
+    setCurrentScreen({ screen: Screens.EDIT, member: member.id });
   };
 
   return (
