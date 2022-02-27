@@ -1,6 +1,6 @@
 # Member Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses the [Ant Design](https://ant.design/) component library and [Redux](https://redux.js.org/) for state management.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses the [Ant Design](https://ant.design/) component library for UI components and [Redux](https://redux.js.org/) for state management.
 
 ## 🏗️ Building and Testing
 
@@ -20,12 +20,17 @@ Edit Screen
 
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/22990100/155874158-1dd760a5-34fa-4c5b-9331-a7884e379c6f.png">
 
+## 🧭 Walkthrough
+
+The root of the application, the `App` component (located under src), manages navigation between the screens, deciding which to render. The screens are located under the `screens` folder and contain the layout for their screens as well as the logic to dispatch thunks and navigate to other components relevant to that screen (ex. the `AddScreen` contains the logic to dispatch the `addMember` thunk and navigate back to the List screen upon adding a member). Under the `components` folder are presentational components that are reused across the screens.
+
+`theme.ts` contains colors and styled components used across the application. The Redux store and reducer are created in `store.ts`. Other redux logic, namely the thunks and types, is located under the `ducks` folder.
 
 ## 🔧 Room for Improvement
 
 The first thing I'd do is work out the `Jest encountered an unexpected token` error I was getting so that I could build more integration tests. Right now, I'm fairly confident in the functionality of the app after writing a few tests for the thunks and interacting with the app in development mode, but having more integration tests would help me find any odd bugs.
 
-I'd also improve how the app manages redirection, possibly by using URL path routing with [React Router](https://v5.reactrouter.com/web/guides/quick-start) instead of just having a `currentScreen` state in App. Though I think `currentState` was sufficient for this project, it would be more intuitive for users to use URL path routing in an actual web application. As part of these improvements, I would work out how to redirect back from the Edit screen to the List screen after editing a user without simultaneously trying to render both at the same time (updating the user triggers a re-render for the Edit screen).
+I'd also improve how the app manages redirection, possibly by using URL path routing with [React Router](https://v5.reactrouter.com/web/guides/quick-start) instead of just having a `currentScreen` state in App. Though I think `currentScreen` was sufficient for this project, it would be more intuitive for users to use URL path routing in an actual web application. As part of these improvements, I would work out how to redirect back from the Edit screen to the List screen after editing a user without simultaneously trying to render both at the same time (updating the user triggers a re-render for the Edit screen).
 
 I'd also make the styling more responsive based on the screen size (probably using CSS media queries).
 
