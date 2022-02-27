@@ -7,7 +7,7 @@ import { MemberAppState, MemberProps } from '../../ducks/types';
 import ExitButton from '../../components/exitButton';
 import { connect, useDispatch } from 'react-redux';
 import { Screens, ScreenProps } from '../../App';
-import { deleteMember, editMember } from '../../ducks/thunk';
+import { deleteMember, editMember } from '../../ducks/thunks';
 
 interface EditScreenProps extends ScreenProps {
   readonly id?: number;

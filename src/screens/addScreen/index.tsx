@@ -7,7 +7,7 @@ import MemberForm from '../../components/memberForm';
 import ExitButton from '../../components/exitButton';
 import { connect, useDispatch } from 'react-redux';
 import { Screens, ScreenProps } from '../../App';
-import { addMember } from '../../ducks/thunk';
+import { addMember } from '../../ducks/thunks';
 
 const AddScreen: React.FC<ScreenProps> = ({ setCurrentScreen }) => {
   const [addMemberForm] = useForm();

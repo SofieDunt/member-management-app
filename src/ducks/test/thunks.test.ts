@@ -1,5 +1,5 @@
 import { MemberAppTypes, MemberProps, MemberRoles } from '../types';
-import { addMember, deleteMember, editMember } from '../thunk';
+import { addMember, deleteMember, editMember } from '../thunks';
 
 describe('Thunks', () => {
   const dummyMember: MemberProps = {
